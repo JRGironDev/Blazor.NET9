@@ -1,4 +1,5 @@
 ﻿@page "/learnblazor/bindprop"
+
 <div class="row">
 	<div class="col-6 border p-3">
 		<h3 class="text-primary">Product Playground</h3>
@@ -54,16 +55,50 @@
 	private string selectedProp = "";
 
 	Product Product = new()
+		{
+			Id = 1,
+			Name = "Product 1",
+			IsActive = true,
+			Price = 5,
+			ProductProperties = new List<Product_Prop>()
+{
+new Product_Prop { Id = 1, Key = "Color", Value = "Red" },
+new Product_Prop { Id = 2, Key = "Size", Value = "M" },
+new Product_Prop { Id = 3, Key = "Flavor", Value = "Rose" }
+}
+		};
+
+	List<Product> ProductList = new();
+
+	protected override void OnInitialized()
 	{
-		Id = 1,
-		Name = "Product 1",
-		IsActive = true,
-		Price = 5,
-		ProductProperties = new List<Product_Prop>()
-		{ 
-			new Product_Prop { Id = 1, Key = "Color", Value = "Red" },
-			new Product_Prop { Id = 2, Key = "Size", Value = "M" },
-			new Product_Prop { Id = 3, Key = "Flavor", Value = "Rose" }
-		}
-	};
+		ProductList.Add(new()
+			{
+				Id = 1,
+				Name = "Midnight Blaze",
+				IsActive = false,
+				Price = 5.99,
+				ProductProperties = new List<Product_Prop>()
+				{
+				new Product_Prop { Id = 1, Key = "Flovor", Value = "Rose" },
+				new Product_Prop { Id = 2, Key = "Size", Value = "20oz" },
+				new Product_Prop { Id = 3, Key = "Color", Value = "Purple" }
+				}
+			});
+
+		ProductList.Add(new()
+			{
+				Id = 2,
+				Name = "Blossom Lily",
+				IsActive = true,
+				Price = 10.99,
+				ProductProperties = new List<Product_Prop>()
+				{
+				new Product_Prop { Id = 1, Key = "Flovor", Value = "Lily" },
+				new Product_Prop { Id = 2, Key = "Size", Value = "18oz" },
+				new Product_Prop { Id = 3, Key = "Color", Value = "White" }
+				}
+			});
+	}
+
 }
