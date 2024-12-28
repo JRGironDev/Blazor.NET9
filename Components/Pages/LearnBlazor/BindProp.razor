@@ -49,6 +49,27 @@
 			<p>Selected Value: @Product.ProductProperties.FirstOrDefault(u => u.Key == selectedProp).Value</p>
 		}
 	</div>
+
+	<div class="col-12 border p-4">
+		<h2 class="text-success">Product Table</h2>
+		<table class="table table-striped">
+			<thead>
+				<td>Product Name</td>
+				<td>Price</td>
+				<td>Active</td>
+			</thead>
+			<tbody>
+				@foreach (var product in ProductList)
+				{
+					<tr>
+						<td><input type="text" @bind="@product.Name" @bind:event="oninput" /></td>
+						<td><input type="number" @bind="@product.Price" @bind:event="oninput"	/></td>
+						<td><input type="checkbox" @bind="@product.IsActive" /></td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 </div>
 
 @code {
@@ -79,11 +100,11 @@ new Product_Prop { Id = 3, Key = "Flavor", Value = "Rose" }
 				IsActive = false,
 				Price = 5.99,
 				ProductProperties = new List<Product_Prop>()
-				{
-				new Product_Prop { Id = 1, Key = "Flovor", Value = "Rose" },
-				new Product_Prop { Id = 2, Key = "Size", Value = "20oz" },
-				new Product_Prop { Id = 3, Key = "Color", Value = "Purple" }
-				}
+{
+new Product_Prop { Id = 1, Key = "Flovor", Value = "Rose" },
+new Product_Prop { Id = 2, Key = "Size", Value = "20oz" },
+new Product_Prop { Id = 3, Key = "Color", Value = "Purple" }
+}
 			});
 
 		ProductList.Add(new()
@@ -93,11 +114,11 @@ new Product_Prop { Id = 3, Key = "Flavor", Value = "Rose" }
 				IsActive = true,
 				Price = 10.99,
 				ProductProperties = new List<Product_Prop>()
-				{
-				new Product_Prop { Id = 1, Key = "Flovor", Value = "Lily" },
-				new Product_Prop { Id = 2, Key = "Size", Value = "18oz" },
-				new Product_Prop { Id = 3, Key = "Color", Value = "White" }
-				}
+{
+new Product_Prop { Id = 1, Key = "Flovor", Value = "Lily" },
+new Product_Prop { Id = 2, Key = "Size", Value = "18oz" },
+new Product_Prop { Id = 3, Key = "Color", Value = "White" }
+}
 			});
 	}
 
