@@ -19,13 +19,19 @@
                     }
                 }
                 <br />
-                <input type="button" class="btn btn-danger" style="width:100px;" value="Delete"/>
+                <input type="button" class="btn btn-danger" style="width:100px;" value="Delete" @onclick="() => DeleteProduct(product.Id)" />
             </div>
         }
+    </div>
+
+    <div class="row pt-4">
+        <input type="button" class="btn btn-success" style="width:100px;" value="Counter" @onclick="() => IncrementCount(5)" />
+        Counter: @Count 
     </div>
 </div>
 
 @code {
+    public int Count { get; set; } = 0;
     List<Product> ProductList = new();
 
     protected override void OnInitialized()
@@ -37,11 +43,11 @@
                 IsActive = false,
                 Price = 5.99,
                 ProductProperties = new List<Product_Prop>()
-{
-new Product_Prop { Id = 1, Key = "Flovor", Value = "Rose" },
-new Product_Prop { Id = 2, Key = "Size", Value = "20oz" },
-new Product_Prop { Id = 3, Key = "Color", Value = "Purple" }
-}
+            {
+            new Product_Prop { Id = 1, Key = "Flovor", Value = "Rose" },
+            new Product_Prop { Id = 2, Key = "Size", Value = "20oz" },
+            new Product_Prop { Id = 3, Key = "Color", Value = "Purple" }
+            }
             });
 
         ProductList.Add(new()
@@ -51,12 +57,25 @@ new Product_Prop { Id = 3, Key = "Color", Value = "Purple" }
                 IsActive = true,
                 Price = 10.99,
                 ProductProperties = new List<Product_Prop>()
-{
-new Product_Prop { Id = 1, Key = "Flovor", Value = "Lily" },
-new Product_Prop { Id = 2, Key = "Size", Value = "18oz" },
-new Product_Prop { Id = 3, Key = "Color", Value = "White" }
-}
+                {
+                new Product_Prop { Id = 1, Key = "Flovor", Value = "Lily" },
+                new Product_Prop { Id = 2, Key = "Size", Value = "18oz" },
+                new Product_Prop { Id = 3, Key = "Color", Value = "White" }
+                }
             });
     }
 
+    private void IncrementCount(int counter)
+    {
+        Count+=counter;
+    }
+
+    private void DeleteProduct(int productId)
+    {
+        var product = ProductList.FirstOrDefault(x => x.Id == productId);
+        if (product != null)
+        {
+            ProductList.Remove(product);
+        }
+    }
 }
