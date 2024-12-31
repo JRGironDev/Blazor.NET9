@@ -1,17 +1,19 @@
 ﻿@page "/learnblazor/demoproduct"
 
 <h2 class="text-primary">DemoProduct</h2>
+<p>Favorite Count: @FavoriteCount </p>
 <div class="border p-2 mt-2">
     <div class="row">
         @foreach (var product in ProductList)
         {
-            <_IndividualProduct Product="@product" />
+            <_IndividualProduct Product="@product" OnFavoriteUpdated="FavoriteCountChange" />
         }
     </div>
 </div>
 
 @code {
     public int Count { get; set; } = 0;
+    public int FavoriteCount { get; set; } = 0;
     List<Product> ProductList = new();
 
     protected override void OnInitialized()
@@ -50,6 +52,18 @@ new Product_Prop { Id = 3, Key = "Color", Value = "White" }
         if (product != null)
         {
             ProductList.Remove(product);
+        }
+    }
+
+    protected void FavoriteCountChange(bool isSelected)
+    {
+        if (isSelected)
+        {
+            FavoriteCount++;
+        }
+        else
+        {
+            FavoriteCount--;
         }
     }
 }
