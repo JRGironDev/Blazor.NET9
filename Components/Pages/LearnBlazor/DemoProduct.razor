@@ -2,11 +2,12 @@
 
 <h2 class="text-primary">DemoProduct</h2>
 <p>Favorite Count: @FavoriteCount </p>
+<p>Selected Product: @SelectedProduct</p>
 <div class="border p-2 mt-2">
     <div class="row">
         @foreach (var product in ProductList)
         {
-            <_IndividualProduct Product="@product" OnFavoriteUpdated="FavoriteCountChange" />
+            <_IndividualProduct Product="@product" OnFavoriteUpdated="FavoriteCountChange" OnSelectedProductChange="UpdateSelectedProduct" />
         }
     </div>
 </div>
@@ -14,6 +15,7 @@
 @code {
     public int Count { get; set; } = 0;
     public int FavoriteCount { get; set; } = 0;
+    public string SelectedProduct { get; set; } = string.Empty;
     List<Product> ProductList = new();
 
     protected override void OnInitialized()
@@ -65,5 +67,10 @@ new Product_Prop { Id = 3, Key = "Color", Value = "White" }
         {
             FavoriteCount--;
         }
+    }
+
+    protected void UpdateSelectedProduct(string productName)
+    {
+        SelectedProduct = productName;
     }
 }
