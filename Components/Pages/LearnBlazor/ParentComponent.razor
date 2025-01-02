@@ -2,21 +2,24 @@
 
 <h3>ParentComponent</h3>
 
-<_ChildComponent Title="This title is passed as as parameter from ParentComponent" OnButtonClick="ShowMessage">
-    Some text between the tags from ParentComponent
-</_ChildComponent>
+<CascadingValue Value="@messageForGrandChildTemp">
+    <CascadingValue Value="@LuckyNumber">
+        <_ChildComponent OnButtonClick="ShowMessage" Title="This title is passed as as parameter from ParentComponent">
+            <ChildSomeContent>
+                Some text between the tags from ParentComponent
+            </ChildSomeContent>
+            <ChildContent>
+                Text from _ChildComponent
+            </ChildContent>
+        </_ChildComponent>
+    </CascadingValue>
+</CascadingValue>
 
 <p>@messageText</p>
 
-<_ChildComponent Title="This title is passed as as parameter from ParentComponent">
-    <button class="btn btn-primary">Click me</button>
-</_ChildComponent>
-
-<_ChildComponent Title="This title is passed as as parameter from ParentComponent">
-
-</_ChildComponent>
-
 @code {
+    private string messageForGrandChildTemp = "This is a text form ParentComponent to GrandChildComponent";
+    private int LuckyNumber = 7;
     public string messageText = "";
 
     private void ShowMessage()
